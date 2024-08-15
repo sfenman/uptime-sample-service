@@ -127,6 +127,14 @@ module "ecs_service" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
+
+  # Autoscaling
+  create_autoscaling           = true
+  create_autoscaling_cpu       = true
+  autoscaling_min_capacity     = 1
+  autoscaling_max_capacity     = 10
+  autoscaling_cpu_target_value = 80
+
 }
 
 

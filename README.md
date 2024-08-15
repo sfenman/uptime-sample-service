@@ -14,6 +14,8 @@ ECS components are consisted of: ECS Cluster which is can contain multiple ECS S
 the ECS Service which runs our containirized service and ECS Task definition which defines the configuration
 that the ECS service is using for our container. The service will be deployed in our private subnets ensuring high availability.
 Also an autoscaling mechanism will be triggered to increase the number of replicas based on a metric that will define.
+Currently, we are using a CPU target on 80% capacity.
+We also use a spot capacity provider to use in case our service is stateless.
 
 ### ECR
 A container repository where we can upload our container image.

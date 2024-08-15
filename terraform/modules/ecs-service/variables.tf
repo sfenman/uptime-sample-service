@@ -168,3 +168,45 @@ variable "subnets" {
   type        = list(string)
   default     = []
 }
+
+variable "create_autoscaling" {
+  description = "Flag to enable or disable autoscaling"
+  type        = bool
+  default     = false
+}
+
+variable "create_autoscaling_memory" {
+  description = "Flag to enable or disable memory-based autoscaling"
+  type        = bool
+  default     = false
+}
+
+variable "create_autoscaling_cpu" {
+  description = "Flag to enable or disable CPU-based autoscaling"
+  type        = bool
+  default     = false
+}
+
+variable "autoscaling_max_capacity" {
+  description = "The maximum capacity of the service for autoscaling"
+  type        = number
+  default     = null
+}
+
+variable "autoscaling_min_capacity" {
+  description = "The minimum capacity of the service for autoscaling"
+  type        = number
+  default     = null
+}
+
+variable "autoscaling_memory_target_value" {
+  description = "The target value for memory utilization autoscaling"
+  type        = number
+  default     = null
+}
+
+variable "autoscaling_cpu_target_value" {
+  description = "The target value for CPU utilization autoscaling"
+  type        = number
+  default     = null
+}

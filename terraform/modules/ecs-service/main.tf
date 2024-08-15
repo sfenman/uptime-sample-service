@@ -97,3 +97,49 @@ resource "aws_security_group_rule" "this" {
   prefix_list_ids          = try(each.value.prefix_list_ids, null)
   source_security_group_id = try(each.value.source_security_group_id, null)
 }
+
+resource "aws_appautoscaling_target" "target" {
+  count = var.create_autoscaling ? 1 : 0
+
+  max_capacity       = var.autoscaling_max_capacity
+  min_capacity       = var.autoscaling_min_capacity
+  resource_id        = "service/${var.cluster}/${var.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+resource "aws_appautoscaling_policy" "memory_policy" {
+  count = var.create_autoscaling && var.create_autoscaling_memory ? 1 : 0
+
+  name               = "Autoscaling rule based on memory usage for service ${var.name}"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = aws_appautoscaling_target.target[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.target[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target[0].service_namespace
+
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageMemoryUtilization"
+    }
+
+    target_value = var.autoscaling_memory_target_value
+  }
+}
+
+resource "aws_appautoscaling_policy" "cpu_policy" {
+  count = var.create_autoscaling && var.create_autoscaling_cpu ? 1 : 0
+
+  name               = "Autoscaling rule based on CPU usage for service ${var.name}"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = aws_appautoscaling_target.target[0].resource_id
+  scalable_dimension = aws_appautoscaling_target.target[0].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target[0].service_namespace
+
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageCPUUtilization"
+    }
+
+    target_value = var.autoscaling_cpu_target_value
+  }
+}

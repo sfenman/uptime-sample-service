@@ -20,6 +20,9 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_appautoscaling_policy.cpu_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
+| [aws_appautoscaling_policy.memory_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
+| [aws_appautoscaling_target.target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target) | resource |
 | [aws_ecs_service.service](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service) | resource |
 | [aws_security_group.sg](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group_rule.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
@@ -29,10 +32,17 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_assign_public_ip"></a> [assign\_public\_ip](#input\_assign\_public\_ip) | Whether to assign a public IP to the service | `bool` | `false` | no |
+| <a name="input_autoscaling_cpu_target_value"></a> [autoscaling\_cpu\_target\_value](#input\_autoscaling\_cpu\_target\_value) | The target value for CPU utilization autoscaling | `number` | `null` | no |
+| <a name="input_autoscaling_max_capacity"></a> [autoscaling\_max\_capacity](#input\_autoscaling\_max\_capacity) | The maximum capacity of the service for autoscaling | `number` | `null` | no |
+| <a name="input_autoscaling_memory_target_value"></a> [autoscaling\_memory\_target\_value](#input\_autoscaling\_memory\_target\_value) | The target value for memory utilization autoscaling | `number` | `null` | no |
+| <a name="input_autoscaling_min_capacity"></a> [autoscaling\_min\_capacity](#input\_autoscaling\_min\_capacity) | The minimum capacity of the service for autoscaling | `number` | `null` | no |
 | <a name="input_capacity_provider_strategy"></a> [capacity\_provider\_strategy](#input\_capacity\_provider\_strategy) | Capacity provider strategy | `list(any)` | `[]` | no |
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | The cluster where the service will be run | `string` | `null` | no |
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Name of the container | `string` | `null` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Port of the container | `number` | `null` | no |
+| <a name="input_create_autoscaling"></a> [create\_autoscaling](#input\_create\_autoscaling) | Flag to enable or disable autoscaling | `bool` | `false` | no |
+| <a name="input_create_autoscaling_cpu"></a> [create\_autoscaling\_cpu](#input\_create\_autoscaling\_cpu) | Flag to enable or disable CPU-based autoscaling | `bool` | `false` | no |
+| <a name="input_create_autoscaling_memory"></a> [create\_autoscaling\_memory](#input\_create\_autoscaling\_memory) | Flag to enable or disable memory-based autoscaling | `bool` | `false` | no |
 | <a name="input_create_security_group"></a> [create\_security\_group](#input\_create\_security\_group) | Determines whether to create security group for RDS cluster | `bool` | `true` | no |
 | <a name="input_deployment_controller_type"></a> [deployment\_controller\_type](#input\_deployment\_controller\_type) | Deployment controller type: CODE\_DEPLOY or ECS. Default: ECS | `string` | `null` | no |
 | <a name="input_deployment_maximum_percent"></a> [deployment\_maximum\_percent](#input\_deployment\_maximum\_percent) | Upper limit (percentage of desired\_count) of running tasks that can be running in a service during a deployment | `number` | `null` | no |
