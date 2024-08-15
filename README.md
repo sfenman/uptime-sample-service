@@ -21,6 +21,9 @@ We also use a spot capacity provider to use in case our service is stateless.
 A container repository where we can upload our container image.
 Example way to deploy using a script and the AWS CLI:
 
+### VPC
+We also add a VPC as a supporting resouces that creates a new VPC, subnets, IGW, NAT Gateway, route tables, routes and more. Again we used an open source module to define all of the resources as it a production ready to use module without the maintenance cost.
+
 ```
 #!/bin/bash
 set -eux -o pipefail
