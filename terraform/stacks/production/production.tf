@@ -43,6 +43,24 @@ module "task_def" {
       protocol      = "tcp"
     }
   ]
+  container_environment = [
+    {
+      name  = "DATABASE_NAME",
+      value = "pythonapp_db",
+    },
+    {
+      name  = "DATABASE_USER",
+      value = "pythonapp",
+    },
+    {
+      name  = "DATABASE_PASSWORD",
+      value = "pythonapp",
+    },
+    {
+      name  = "DATABASE",
+      value = module.aurora.cluster_endpoint
+    },
+  ]
   aws_region               = "eu-west-1"
   family                   = "uptime-python-taskdef"
   cpu                      = 256
