@@ -75,7 +75,7 @@ All relevant resources have a `cost-report-tags` attribute to identify and manag
 - Create a custom domain using route53.
 - Use AWS Certificate manager and use HTTPS instead of HTTP for the service.
 - Use a secret manager service such as AWS Secrets Manager to handle database password or other keys.
-- Use AWS WAF to protect the service from DDOS or other malicious attacks.
+- Use AWS WAF & AWS Shield to protect the service from DDOS or other malicious attacks.
 
 
 ## Background tasks / Scheduled tasks
